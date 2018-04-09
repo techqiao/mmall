@@ -80,7 +80,7 @@ public class CaffeineConfig {
         return cacheManager;
     }
 
-    private static Logger logger = LoggerFactory.getLogger(TokenCache.class);
+    private static Logger logger = LoggerFactory.getLogger(CaffeineConfig.class);
 
     //LRU算法
     private static LoadingCache<String,String> localCache = CacheBuilder.newBuilder()
