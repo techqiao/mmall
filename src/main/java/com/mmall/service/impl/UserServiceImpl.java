@@ -170,4 +170,47 @@ public class UserServiceImpl implements IUserService {
         }
         return Result.error("修改失败");
     }
+
+    @Override
+    public Result<String> updatePassword(String passwordNew, String passwordOld, User user) {
+        UserCriteria usercriteria = new UserCriteria();
+        UserCriteria.Criteria criteria = usercriteria.createCriteria();
+        criteria.andIdEqualTo(user.getId());
+        criteria.andPasswordEqualTo(MD5Util.MD5EncodeUtf8(passwordOld));
+        user.setPassword(MD5Util.MD5EncodeUtf8(passwordNew));
+        user.setUpdateTime(new Date());
+        int count = userMapper.updateByExampleSelective(user,usercriteria);
+        if(count > 0){
+            return Result.success("修改密码成功");
+        }
+        return Result.error("修改密码失败");
+    }
+
+    @Override
+    public Result<User> updateUserInfo(User user) {
+        //username 不能更改
+        //email 校验，检验新的
+        UserCriteria usercriteria = new UserCriteria();
+        UserCriteria.Criteria criteria = usercriteria.createCriteria();
+        criteria.andIdNotEqualTo(user.getId());
+        criteria.andEmailEqualTo(user.getEmail());
+        int count = userMapper.countByExample(usercriteria);
+        if(count>0){
+            return Result.error("Email 已经存在");
+        }
+        user.setUpdateTime(new Date());
+        int count2 = userMapper.updateByPrimaryKey(user);
+        if(count2>0){
+            return Result.success(user);
+        }
+        return Result.error("修改失败");
+    }
+
+    @Override
+    public Result<Boolean> checkAdminRole(User user) {
+        if(user!=null && user.getRole().intValue() == Const.Role.ROLE_ADMIN){
+            return Result.success();
+        }
+        return Result.error();
+    }
 }

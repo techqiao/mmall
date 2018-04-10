@@ -75,10 +75,36 @@ public class UserController {
         return userService.checkAnswer(user);
     }
 
-    @ApiOperation(value = "重置密码", notes = "重置密码")
-    @PostMapping("resetPassword")
-    public Result<String> resetPassword(String username, String passwordNew, String forgetToken) {
+    @ApiOperation(value = "忘记密码的重置密码", notes = "忘记密码的重置密码")
+    @PatchMapping("forgetResetPassword")
+    public Result<String> forgetResetPassword(String username, String passwordNew, String forgetToken) {
         return userService.resetPassword(username, passwordNew, forgetToken);
+    }
+
+
+    @ApiOperation(value = "修改密码", notes = "修改密码")
+    @PatchMapping("updatePassword")
+    public Result<String> updatePassword(HttpSession session, String passwordNew, String passwordOld) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return Result.error("用户未登录");
+        }
+        return userService.updatePassword(passwordNew, passwordOld, user);
+    }
+
+    @ApiOperation(value = "修改当前用户信息", notes = "修改当前用户信息")
+    @PatchMapping("updateUserInfo")
+    public Result<User> updateUserInfo(HttpSession session, @RequestBody User user) {
+        User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
+        if (currentUser == null) {
+            return Result.error("用户未登录");
+        }
+        user.setId(currentUser.getId());
+        Result<User> result = userService.updateUserInfo(user);
+        if (result.isSuccess()) {
+            session.setAttribute(Const.CURRENT_USER, result.getData());
+        }
+        return result;
     }
 
 

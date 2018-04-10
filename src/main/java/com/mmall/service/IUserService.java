@@ -70,4 +70,27 @@ public interface IUserService {
      * @return
      */
     Result<String> resetPassword(String username, String passwordNew, String forgetToken);
+
+    /**
+     * 修改密码
+     * @param passwordNew
+     * @param passwordOld
+     * @return
+     */
+    Result<String> updatePassword(String passwordNew,String passwordOld,User user);
+
+
+    /**
+     * 修改当前用户信息
+     * @param user
+     * @return
+     */
+    Result<User> updateUserInfo(User user);
+
+    /**
+     * 校验是否是管理员
+     * @param user
+     * @return
+     */
+    Result<Boolean> checkAdminRole(User user);
 }

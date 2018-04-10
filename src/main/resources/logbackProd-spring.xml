@@ -35,7 +35,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.shuyang.mall" level="info">
+    <logger name="com.mall" level="info">
     </logger>
 
     <root level="warn">
