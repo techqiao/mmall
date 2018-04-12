@@ -1,10 +1,7 @@
 package com.mmall.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.mmall.common.Const;
-import com.mmall.common.PagerParam;
-import com.mmall.common.ResponseCode;
-import com.mmall.common.Result;
+import com.mmall.common.*;
 import com.mmall.domain.Product;
 import com.mmall.domain.ProductWithBLOBs;
 import com.mmall.domain.User;
@@ -51,15 +48,16 @@ public class ProductController {
     @ApiOperation(value = "商品列表", notes = "商品列表")
     @PostMapping("productList")
     public Result<PageInfo> list(@RequestBody PagerParam pagerParam,HttpSession session){
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
-        if(user==null){
-            return Result.error(ResponseCode.NEED_LOGIN.getCode(),"用户未登录");
-        }
-        if(userService.checkAdminRole(user).isSuccess()){
-            return productService.getProductList(pagerParam);
-        }else {
-            return Result.error("无权限");
-        }
+//        User user = (User)session.getAttribute(Const.CURRENT_USER);
+//        if(user==null){
+//            return Result.error(ResponseCode.NEED_LOGIN.getCode(),"用户未登录");
+//        }
+//        if(userService.checkAdminRole(user).isSuccess()){
+//            return productService.getProductList(pagerParam);
+//        }else {
+//            return Result.error("无权限");
+//        }
+        return productService.getProductList(pagerParam);
     }
 
     //动态查询

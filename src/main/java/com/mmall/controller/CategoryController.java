@@ -1,6 +1,7 @@
 package com.mmall.controller;
 
 import com.mmall.common.Const;
+import com.mmall.common.Login;
 import com.mmall.common.ResponseCode;
 import com.mmall.common.Result;
 import com.mmall.domain.Category;
@@ -24,7 +25,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "category", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@Api(value = "类目服务",description = "商品的类目服务")
+@Api(value = "类目服务", description = "商品的类目服务")
 public class CategoryController {
 
     @Autowired
@@ -32,32 +33,35 @@ public class CategoryController {
     @Autowired
     private ICategoryService categoryService;
 
+    @Login
     @ApiOperation(value = "增加类目")
     @PostMapping("addCategory")
     public Result addCategory(HttpSession session, String categoryName,
                               @RequestParam(value = "parentId", defaultValue = "0") int parentId) {
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
-        if(user==null){
-            return Result.error(ResponseCode.NEED_LOGIN.getCode(),"用户未登录");
-        }
-        if(userService.checkAdminRole(user).isSuccess()){
-            return categoryService.addCategory(categoryName,parentId);
-        }else {
-            return Result.error("无权限操作");
-        }
+//        User user = (User)session.getAttribute(Const.CURRENT_USER);
+//        if(user==null){
+//            return Result.error(ResponseCode.NEED_LOGIN.getCode(),"用户未登录");
+//        }
+//        if(userService.checkAdminRole(user).isSuccess()){
+//            return categoryService.addCategory(categoryName,parentId);
+//        }else {
+//            return Result.error("无权限操作");
+//        }
+
+        return categoryService.addCategory(categoryName, parentId);
     }
 
 
     @ApiOperation(value = "修改类目名称")
     @PostMapping("setCategoryName")
     public Result setCategoryName(HttpSession session, String categoryName, Integer categoryId) {
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
-        if(user==null){
-            return Result.error(ResponseCode.NEED_LOGIN.getCode(),"用户未登录");
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return Result.error(ResponseCode.NEED_LOGIN.getCode(), "用户未登录");
         }
-        if(userService.checkAdminRole(user).isSuccess()){
-            return categoryService.setCategoryName(categoryName,categoryId);
-        }else {
+        if (userService.checkAdminRole(user).isSuccess()) {
+            return categoryService.setCategoryName(categoryName, categoryId);
+        } else {
             return Result.error("无权限操作");
         }
     }
@@ -65,14 +69,14 @@ public class CategoryController {
     @ApiOperation(value = "获取子节点类目,不递归")
     @GetMapping("getChildParableCategory")
     public Result<List<Category>> getChildParableCategory(HttpSession session,
-                                                          @RequestParam(value = "categoryId",defaultValue = "0") Integer categoryId){
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
-        if(user==null){
-            return Result.error(ResponseCode.NEED_LOGIN.getCode(),"用户未登录");
+                                                          @RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return Result.error(ResponseCode.NEED_LOGIN.getCode(), "用户未登录");
         }
-        if(userService.checkAdminRole(user).isSuccess()){
+        if (userService.checkAdminRole(user).isSuccess()) {
             return categoryService.getCategoryList(categoryId);
-        }else {
+        } else {
             return Result.error("无权限操作");
         }
     }
@@ -81,15 +85,15 @@ public class CategoryController {
     @ApiOperation(value = "获取子节点类目,递归")
     @GetMapping("getChildDeepCategory")
     public Result<List<Category>> getChildDeepCategory(HttpSession session,
-                                                          @RequestParam(value = "categoryId",defaultValue = "0") Integer categoryId){
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
-        if(user==null){
-            return Result.error(ResponseCode.NEED_LOGIN.getCode(),"用户未登录");
+                                                       @RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return Result.error(ResponseCode.NEED_LOGIN.getCode(), "用户未登录");
         }
-        if(userService.checkAdminRole(user).isSuccess()){
+        if (userService.checkAdminRole(user).isSuccess()) {
             //查询当前节点的id和递归子节点的id
             return categoryService.getCategoryDeepList(categoryId);
-        }else {
+        } else {
             return Result.error("无权限操作");
         }
     }

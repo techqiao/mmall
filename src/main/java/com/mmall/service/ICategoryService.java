@@ -1,5 +1,6 @@
 package com.mmall.service;
 
+import com.mmall.common.Login;
 import com.mmall.common.Result;
 import com.mmall.domain.Category;
 

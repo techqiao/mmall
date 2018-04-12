@@ -1,6 +1,7 @@
 package com.mmall.service;
 
 import com.github.pagehelper.PageInfo;
+import com.mmall.common.Login;
 import com.mmall.common.PagerParam;
 import com.mmall.common.Result;
 import com.mmall.domain.ProductWithBLOBs;
