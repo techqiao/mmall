@@ -79,8 +79,8 @@ public class Result<T> implements Serializable {
         return new Result<>(ResponseCode.ERROR.getCode(), errorMessage);
     }
 
-    public static <T> Result<T> error(int errorCode, String errorMessage) {
-        return new Result<>(errorCode, errorMessage);
+    public static <T> Result<T> error(ResponseCode responseCode) {
+        return new Result<>(responseCode.getCode(), responseCode.getMsg());
     }
 
 

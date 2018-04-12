@@ -60,6 +60,13 @@ public class ProductServiceImpl implements IProductService {
         ProductCriteria productCriteria = new ProductCriteria();
         productCriteria.setOrderByClause("category_id");
         List<Product> productList = productMapper.selectByExample(productCriteria);
+        //转成vo
         return Result.success(new PageInfo(productList));
+    }
+
+    @Override
+    public Result<Product> getProductDetail(String name) {
+        // 查询商品详情
+        return null;
     }
 }

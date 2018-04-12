@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.mmall.common.Login;
 import com.mmall.common.PagerParam;
 import com.mmall.common.Result;
+import com.mmall.domain.Product;
 import com.mmall.domain.ProductWithBLOBs;
 
 /**
@@ -26,4 +27,11 @@ public interface IProductService {
      * @return
      */
     Result<PageInfo> getProductList(PagerParam pagerParam);
+
+    /**
+     * 获取商品信息
+     * @param name
+     * @return
+     */
+    Result<Product> getProductDetail(String name);
 }

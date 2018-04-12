@@ -47,7 +47,6 @@ public class CategoryController {
 //        }else {
 //            return Result.error("无权限操作");
 //        }
-
         return categoryService.addCategory(categoryName, parentId);
     }
 
@@ -57,7 +56,7 @@ public class CategoryController {
     public Result setCategoryName(HttpSession session, String categoryName, Integer categoryId) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return Result.error(ResponseCode.NEED_LOGIN.getCode(), "用户未登录");
+            return Result.error(ResponseCode.NEED_LOGIN);
         }
         if (userService.checkAdminRole(user).isSuccess()) {
             return categoryService.setCategoryName(categoryName, categoryId);
@@ -72,7 +71,7 @@ public class CategoryController {
                                                           @RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return Result.error(ResponseCode.NEED_LOGIN.getCode(), "用户未登录");
+            return Result.error(ResponseCode.NEED_LOGIN);
         }
         if (userService.checkAdminRole(user).isSuccess()) {
             return categoryService.getCategoryList(categoryId);
@@ -88,7 +87,7 @@ public class CategoryController {
                                                        @RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return Result.error(ResponseCode.NEED_LOGIN.getCode(), "用户未登录");
+            return Result.error(ResponseCode.NEED_LOGIN);
         }
         if (userService.checkAdminRole(user).isSuccess()) {
             //查询当前节点的id和递归子节点的id

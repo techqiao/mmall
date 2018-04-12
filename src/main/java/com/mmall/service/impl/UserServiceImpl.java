@@ -41,7 +41,7 @@ public class UserServiceImpl implements IUserService {
         criteria.andPasswordEqualTo(MD5Util.MD5EncodeUtf8(password));
         List<User> Users = userMapper.selectByExample(usercriteria);
         if (Users.size() == 0) {
-            return Result.error(ResponseCode.NO_CHANGED.getCode(), "密码错误");
+            return Result.error(ResponseCode.NO_CHANGED);
         }
         User user = Users.get(0);
         user.setPassword(StringUtils.EMPTY);
@@ -120,7 +120,7 @@ public class UserServiceImpl implements IUserService {
         if (users.size() > 0) {
             return Result.success(users.get(0).getQuestion());
         }
-        return Result.error(ResponseCode.INTERNAL_SERVER_ERROR.getCode(), ResponseCode.INTERNAL_SERVER_ERROR.getMsg());
+        return Result.error(ResponseCode.INTERNAL_SERVER_ERROR);
     }
 
     @Override

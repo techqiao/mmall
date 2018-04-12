@@ -2,11 +2,10 @@ package com.mmall.common;
 
 import com.mmall.domain.User;
 import com.mmall.service.IUserService;
+import com.sun.org.apache.regexp.internal.RE;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -32,8 +31,10 @@ public class LoginAspect {
     public void HttpAspect() {
     }
 
-    @Before("HttpAspect()")
-    public void doBefore(JoinPoint joinPoint) {
+    @Around("HttpAspect()")
+    //  @Before("HttpAspect()")
+    //  如果要直接在controller自动拦截返回Result信息，需要用@Around,不然只能自己抛出异常处理或者写处理的接口类处理
+    public Result doBefore(JoinPoint joinPoint) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
         //读取session中的用户
@@ -49,11 +50,19 @@ public class LoginAspect {
         //参数
         log.info("method={}", joinPoint.getArgs());
         if (user == null) {
-            throw new UserException("用户未登录");
+            //throw new UserException("用户未登录");
+            return Result.error("用户未登录");
         } else {
             if (!userService.checkAdminRole(user).isSuccess()) {
-                throw new UserException("无权限操作");
+//                throw new UserException("无权限操作");
+                return Result.error("无权限操作");
             }
         }
+        return null;
+    }
+
+    @AfterReturning(returning = "result", pointcut = "HttpAspect()")
+    public void afterReturning(Result result) {
+        log.info("response={}", result);
     }
 }
