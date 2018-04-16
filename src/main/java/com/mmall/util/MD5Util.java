@@ -1,8 +1,5 @@
 package com.mmall.util;
 
-import org.apache.logging.log4j.util.PropertiesUtil;
-import org.springframework.util.StringUtils;
-
 import java.security.MessageDigest;
 
 

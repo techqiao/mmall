@@ -105,7 +105,7 @@ public class UserServiceImpl implements IUserService {
         if (user != null) {
             return Result.success(user);
         }
-        return Result.success(null);
+        return Result.success(user);
     }
 
     @Override

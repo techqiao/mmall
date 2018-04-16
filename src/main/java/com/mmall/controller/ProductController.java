@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
- * <p>Description : mmall
+ * <p>Description : 产品服务
  * <p>Date : 2018-04-11 14:38
  * <p>@Author : wjq
  * <P>Email : wujiangqiao@difengshanguo.com
@@ -37,16 +37,17 @@ public class ProductController {
     @Autowired
     private IFileService fileService;
 
+
     @ApiOperation(value = "商品更新", notes = "商品更新")
     @PostMapping("productSave")
-    public Result productSave(HttpSession session, ProductWithBLOBs product){
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
-        if(user ==null){
+    public Result productSave(HttpSession session, ProductWithBLOBs product) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
             return Result.error("用户未登录");
         }
-        if(userService.checkAdminRole(user).isSuccess()){
+        if (userService.checkAdminRole(user).isSuccess()) {
             return productService.saveOrUpdateProduct(product);
-        }else {
+        } else {
             return Result.error("无权限");
         }
     }
@@ -55,7 +56,7 @@ public class ProductController {
     @Login
     @ApiOperation(value = "商品列表", notes = "商品列表")
     @PostMapping("productList")
-    public Result<PageInfo> list(@RequestBody PagerParam pagerParam){
+    public Result<PageInfo> list(@RequestBody PagerParam pagerParam) {
         return productService.getProductList(pagerParam);
     }
 
@@ -63,7 +64,7 @@ public class ProductController {
     @Login
     @ApiOperation(value = "商品搜索", notes = "商品搜索")
     @PostMapping("searchProduct")
-    public Result<Product> searchProduct(@RequestParam String name){
+    public Result<Product> searchProduct(@RequestParam String name) {
         return productService.getProductDetail(name);
     }
 
@@ -73,7 +74,7 @@ public class ProductController {
     public Result upload(MultipartFile file, HttpServletRequest request) {
         String path = request.getSession().getServletContext().getRealPath("upload");
         String targetFileName = fileService.upload(file, path);
-        String url = PropertiesUtil.getProperty("ftp.server.http.prefix")+targetFileName;
+        String url = PropertiesUtil.getProperty("ftp.server.http.prefix") + targetFileName;
         return Result.success(url);
     }
 

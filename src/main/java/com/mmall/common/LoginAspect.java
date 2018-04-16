@@ -2,7 +2,6 @@ package com.mmall.common;
 
 import com.mmall.domain.User;
 import com.mmall.service.IUserService;
-import com.sun.org.apache.regexp.internal.RE;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;

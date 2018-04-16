@@ -69,6 +69,10 @@ public class Result<T> implements Serializable {
         return new Result<>(ResponseCode.SUCCESS.getCode(), msg, data);
     }
 
+    public static <T> Result<T> success(ResponseCode responseCode) {
+        return new Result<>(responseCode.getCode(), responseCode.getMsg());
+    }
+
 
     public static <T> Result<T> error() {
         return new Result<>(ResponseCode.ERROR.getCode(), ResponseCode.ERROR.getMsg());
