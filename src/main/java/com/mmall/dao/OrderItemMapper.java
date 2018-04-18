@@ -2,7 +2,9 @@ package com.mmall.dao;
 
 import com.mmall.domain.OrderItem;
 import com.mmall.domain.OrderItemCriteria;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
@@ -102,4 +104,6 @@ public interface OrderItemMapper {
      * @mbggenerated Mon Apr 09 11:26:14 CST 2018
      */
     int updateByPrimaryKey(OrderItem record);
+
+    int batchInsert(@Param("orderItemList") List<OrderItem> orderItemList);
 }

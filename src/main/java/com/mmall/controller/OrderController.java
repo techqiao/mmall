@@ -37,6 +37,69 @@ public class OrderController {
     @Autowired
     private IOrderService orderService;
 
+
+    @ApiOperation(value = "创建订单")
+    @PostMapping("create")
+    public Result create(HttpSession session, Integer shippingId){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user ==null){
+            return Result.error(ResponseCode.NEED_LOGIN);
+        }
+        return orderService.createOrder(user.getId(),shippingId);
+    }
+
+    @ApiOperation(value = "取消订单")
+    @PostMapping("cancel")
+    public Result cancel(HttpSession session, Long orderNo){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user ==null){
+            return Result.error(ResponseCode.NEED_LOGIN);
+        }
+        return orderService.cancel(user.getId(),orderNo);
+    }
+
+    @ApiOperation(value = "获取购物车中已经选中的商品")
+    @GetMapping("get_order_cart_product")
+    public Result getOrderCartProduct(HttpSession session){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user ==null){
+            return Result.error(ResponseCode.NEED_LOGIN);
+        }
+        return orderService.getOrderCartProduct(user.getId());
+    }
+
+
+    @ApiOperation(value = "获取订单详情")
+    @GetMapping("detail.do")
+    public Result detail(HttpSession session,Long orderNo){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user ==null){
+            return Result.error(ResponseCode.NEED_LOGIN);
+        }
+        return orderService.getOrderDetail(user.getId(),orderNo);
+    }
+
+    @ApiOperation(value = "订单列表")
+    @GetMapping("list.do")
+    public Result list(HttpSession session, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum, @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user ==null){
+            return Result.error(ResponseCode.NEED_LOGIN);
+        }
+        return orderService.getOrderList(user.getId(),pageNum,pageSize);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     @ApiOperation(value = "支付接口")
     @PostMapping("pay")
     public Result pay(HttpSession session, Long orderNo, HttpServletRequest request) {

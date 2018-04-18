@@ -1,6 +1,8 @@
 package com.mmall.service;
 
+import com.github.pagehelper.PageInfo;
 import com.mmall.common.Result;
+import com.mmall.vo.OrderVo;
 
 import java.util.Map;
 
@@ -11,6 +13,48 @@ import java.util.Map;
  * <P>Email : wujiangqiao@difengshanguo.com
  */
 public interface IOrderService {
+
+    /**
+     * 创建订单
+     * @param userId
+     * @param shippingId
+     * @return
+     */
+    Result createOrder(Integer userId, Integer shippingId);
+
+    /**
+     * 取消订单
+     * @param userId
+     * @param orderNo
+     * @return
+     */
+    Result<String> cancel(Integer userId, Long orderNo);
+
+
+    /**
+     * 获取购物车选中商品详情
+     * @param userId
+     * @return
+     */
+    Result getOrderCartProduct(Integer userId);
+
+    /**
+     * 获取订单详情
+     * @param userId
+     * @param orderNo
+     * @return
+     */
+    Result<OrderVo> getOrderDetail(Integer userId, Long orderNo);
+
+    /**
+     * 订单列表
+     * @param userId
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    Result<PageInfo> getOrderList(Integer userId, int pageNum, int pageSize);
+
     /**
      * 支付接口
      * @param orderNo
