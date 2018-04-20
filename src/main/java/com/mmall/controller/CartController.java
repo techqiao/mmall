@@ -9,9 +9,7 @@ import com.mmall.vo.CartVo;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -29,8 +27,7 @@ public class CartController {
     @Autowired
     private ICartService iCartService;
 
-    @RequestMapping("list")
-    @ResponseBody
+    @GetMapping("list")
     public Result<CartVo> list(HttpSession session){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user ==null){
@@ -39,8 +36,7 @@ public class CartController {
         return iCartService.list(user.getId());
     }
 
-    @RequestMapping("add")
-    @ResponseBody
+    @PostMapping("add")
     public Result<CartVo> add(HttpSession session, Integer count, Integer productId){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user ==null){
@@ -51,8 +47,7 @@ public class CartController {
 
 
 
-    @RequestMapping("update")
-    @ResponseBody
+    @PutMapping("update")
     public Result<CartVo> update(HttpSession session, Integer count, Integer productId){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user ==null){
@@ -61,8 +56,7 @@ public class CartController {
         return iCartService.update(user.getId(),productId,count);
     }
 
-    @RequestMapping("delete_product")
-    @ResponseBody
+    @DeleteMapping("delete_product")
     public Result<CartVo> deleteProduct(HttpSession session,String productIds){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user ==null){
@@ -72,8 +66,7 @@ public class CartController {
     }
 
 
-    @RequestMapping("select_all")
-    @ResponseBody
+    @GetMapping("select_all")
     public Result<CartVo> selectAll(HttpSession session){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user ==null){
@@ -82,8 +75,7 @@ public class CartController {
         return iCartService.selectOrUnSelect(user.getId(),null,Const.Cart.CHECKED);
     }
 
-    @RequestMapping("un_select_all")
-    @ResponseBody
+    @GetMapping("un_select_all")
     public Result<CartVo> unSelectAll(HttpSession session){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user ==null){
@@ -94,8 +86,7 @@ public class CartController {
 
 
 
-    @RequestMapping("select")
-    @ResponseBody
+    @GetMapping("select")
     public Result<CartVo> select(HttpSession session,Integer productId){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user ==null){
@@ -104,8 +95,7 @@ public class CartController {
         return iCartService.selectOrUnSelect(user.getId(),productId,Const.Cart.CHECKED);
     }
 
-    @RequestMapping("un_select")
-    @ResponseBody
+    @GetMapping("un_select")
     public Result<CartVo> unSelect(HttpSession session,Integer productId){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user ==null){
@@ -116,8 +106,7 @@ public class CartController {
 
 
 
-    @RequestMapping("get_cart_product_count")
-    @ResponseBody
+    @GetMapping("get_cart_product_count")
     public Result<Integer> getCartProductCount(HttpSession session){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user ==null){

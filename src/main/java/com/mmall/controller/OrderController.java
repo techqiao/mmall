@@ -70,7 +70,7 @@ public class OrderController {
 
 
     @ApiOperation(value = "获取订单详情")
-    @GetMapping("detail.do")
+    @GetMapping("detail")
     public Result detail(HttpSession session,Long orderNo){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user ==null){
@@ -80,7 +80,7 @@ public class OrderController {
     }
 
     @ApiOperation(value = "订单列表")
-    @GetMapping("list.do")
+    @GetMapping("list")
     public Result list(HttpSession session, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum, @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user ==null){
