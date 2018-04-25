@@ -37,7 +37,7 @@ public class ProductController {
     @Autowired
     private IFileService fileService;
 
-
+    @Login
     @ApiOperation(value = "商品更新", notes = "商品更新")
     @PostMapping("productSave")
     public Result productSave(HttpSession session, ProductWithBLOBs product) {

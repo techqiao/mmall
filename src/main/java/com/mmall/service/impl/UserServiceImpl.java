@@ -9,6 +9,7 @@ import com.mmall.domain.User;
 import com.mmall.domain.UserCriteria;
 import com.mmall.service.IUserService;
 import com.mmall.util.MD5Util;
+import com.mmall.util.RedisPoolUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,7 +51,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public Result<String> loginOut(HttpSession session) {
-        session.removeAttribute(Const.CURRENT_USER);
+//        session.removeAttribute(Const.CURRENT_USER);
+        RedisPoolUtil.del(session.getId());
         return Result.success();
     }
 

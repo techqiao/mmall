@@ -4,12 +4,16 @@ import com.mmall.common.Const;
 import com.mmall.common.Result;
 import com.mmall.domain.User;
 import com.mmall.service.IUserService;
+import com.mmall.util.CookieUtil;
+import com.mmall.util.JsonUtil;
+import com.mmall.util.RedisPoolUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -27,10 +31,17 @@ public class UserController {
 
     @ApiOperation(value = "用户登录", notes = "用户登录")
     @PostMapping("login")
-    public Result<User> login(@RequestParam String username, @RequestParam String password, HttpSession session) {
+    public Result<User> login(@RequestParam String username, @RequestParam String password, HttpServletResponse response, HttpSession session) {
         Result<User> result = userService.login(username, password);
         if (result.isSuccess()) {
-            session.setAttribute(Const.CURRENT_USER, result.getData());
+            //session.setAttribute(Const.CURRENT_USER, result.getData());
+            // 写入 cookie
+            CookieUtil.writeLoginToken(response,session.getId());
+            // 放入缓存
+            RedisPoolUtil.setEx(session.getId(),JsonUtil.objToString(result.getData()),Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
+            // 模拟集群 同一个用户在不同服务器上的session id不同
+
+
         }
         return result;
     }

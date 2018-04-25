@@ -3,6 +3,7 @@ package com.mmall.util;
 import com.mmall.common.RedisPool;
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
+
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public class RedisPoolUtil {
      * @param exTime
      * @return
      */
-    public static Long expireToJedis(String key, int exTime) {
+    public static Long expire(String key, int exTime) {
         Jedis jedis = null;
         Long result = null;
         try {
@@ -39,7 +40,7 @@ public class RedisPoolUtil {
         return result;
     }
 
-    public static String addStringToJedis(String key, String value) {
+    public static String set(String key, String value) {
         Jedis jedis = null;
         String result = null;
         try {
@@ -54,7 +55,7 @@ public class RedisPoolUtil {
         return result;
     }
 
-    public static String getStringToJedis(String key) {
+    public static String get(String key) {
         Jedis jedis = null;
         String result = null;
         try {
@@ -69,7 +70,7 @@ public class RedisPoolUtil {
         return result;
     }
 
-    public static Long delStringToJedis(String key) {
+    public static Long del(String key) {
         Jedis jedis = null;
         Long result = null;
         try {
@@ -92,7 +93,7 @@ public class RedisPoolUtil {
      * @param exTime
      * @return
      */
-    public static String setExStringToJedis(String key, String value, int exTime) {
+    public static String setEx(String key, String value, int exTime) {
         Jedis jedis = null;
         String result = null;
         try {
@@ -105,6 +106,28 @@ public class RedisPoolUtil {
         }
         RedisPool.returnResource(jedis);
         return result;
+    }
+
+    public static void main(String[] args) {
+        Jedis jedis = RedisPool.getJedis();
+
+        RedisPoolUtil.set("keyTest", "value");
+
+        String value = RedisPoolUtil.get("keyTest");
+
+        RedisPoolUtil.setEx("keyex", "valueex", 60 * 10);
+
+        RedisPoolUtil.expire("keyTest", 60 * 20);
+
+        RedisPoolUtil.del("keyTest");
+
+
+        String aaa = RedisPoolUtil.get(null);
+        System.out.println(aaa);
+
+        System.out.println("end");
+
+
     }
 
     public static boolean addListToJedis(String key, List<String> list, int cacheSeconds, String methodName) {
