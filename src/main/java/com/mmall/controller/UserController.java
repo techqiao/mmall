@@ -9,10 +9,13 @@ import com.mmall.util.JsonUtil;
 import com.mmall.util.RedisPoolUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -36,9 +39,11 @@ public class UserController {
         if (result.isSuccess()) {
             //session.setAttribute(Const.CURRENT_USER, result.getData());
             // 写入 cookie
-            CookieUtil.writeLoginToken(response,session.getId());
+            CookieUtil.writeLoginToken(response, session.getId());
+            //CookieUtil.readLoginToken(request);
+            //CookieUtil.delLoginToken(response, request);
             // 放入缓存
-            RedisPoolUtil.setEx(session.getId(),JsonUtil.objToString(result.getData()),Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
+            RedisPoolUtil.setEx(session.getId(), JsonUtil.objToString(result.getData()), Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
             // 模拟集群 同一个用户在不同服务器上的session id不同
 
 
@@ -48,8 +53,11 @@ public class UserController {
 
     @ApiOperation(value = "用户登出", notes = "用户登出")
     @GetMapping("loginOut")
-    public Result<String> loginOut(HttpSession session) {
-        return userService.loginOut(session);
+    public Result<String> loginOut(HttpServletRequest request,HttpServletResponse response) {
+        String loginToken = CookieUtil.readLoginToken(request);
+        CookieUtil.delLoginToken(response,request);
+        RedisPoolUtil.del(loginToken);
+        return Result.success();
     }
 
     @ApiOperation(value = "用户注册", notes = "用户注册")
@@ -65,11 +73,17 @@ public class UserController {
     }
 
     @ApiOperation(value = "获取用户信息", notes = "获取用户信息")
-    @GetMapping("getUserInfo/{userId}")
-    public Result<User> getUserInfo(@PathVariable Integer userId, HttpSession session) {
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
+    @GetMapping("getUserInfo")
+    public Result<User> getUserInfo(HttpServletRequest request) {
+//        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        String loginToken = CookieUtil.readLoginToken(request);
+        if(StringUtils.isEmpty(loginToken)){
+            return Result.error("用户未登录");
+        }
+        String userJsonStr = RedisPoolUtil.get(loginToken);
+        User user = JsonUtil.stringToObj(userJsonStr, User.class);
         if (user != null) {
-            return userService.getUserInfo(userId);
+            return Result.success(user);
         }
         return Result.success(user);
     }
