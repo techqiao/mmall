@@ -45,17 +45,15 @@ public class UserController {
             // 放入缓存
             RedisPoolUtil.setEx(session.getId(), JsonUtil.objToString(result.getData()), Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
             // 模拟集群 同一个用户在不同服务器上的session id不同
-
-
         }
         return result;
     }
 
     @ApiOperation(value = "用户登出", notes = "用户登出")
     @GetMapping("loginOut")
-    public Result<String> loginOut(HttpServletRequest request,HttpServletResponse response) {
+    public Result<String> loginOut(HttpServletRequest request, HttpServletResponse response) {
         String loginToken = CookieUtil.readLoginToken(request);
-        CookieUtil.delLoginToken(response,request);
+        CookieUtil.delLoginToken(response, request);
         RedisPoolUtil.del(loginToken);
         return Result.success();
     }
@@ -77,7 +75,7 @@ public class UserController {
     public Result<User> getUserInfo(HttpServletRequest request) {
 //        User user = (User) session.getAttribute(Const.CURRENT_USER);
         String loginToken = CookieUtil.readLoginToken(request);
-        if(StringUtils.isEmpty(loginToken)){
+        if (StringUtils.isEmpty(loginToken)) {
             return Result.error("用户未登录");
         }
         String userJsonStr = RedisPoolUtil.get(loginToken);
@@ -109,8 +107,13 @@ public class UserController {
 
     @ApiOperation(value = "修改密码", notes = "修改密码")
     @PatchMapping("updatePassword")
-    public Result<String> updatePassword(HttpSession session, String passwordNew, String passwordOld) {
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
+    public Result<String> updatePassword(HttpServletRequest request, String passwordNew, String passwordOld) {
+        String loginToken = CookieUtil.readLoginToken(request);
+        if(StringUtils.isEmpty(loginToken)){
+            return Result.error("用户未登录");
+        }
+        String userJsonStr = RedisPoolUtil.get(loginToken);
+        User user = JsonUtil.stringToObj(userJsonStr, User.class);
         if (user == null) {
             return Result.error("用户未登录");
         }
@@ -119,15 +122,19 @@ public class UserController {
 
     @ApiOperation(value = "修改当前用户信息", notes = "修改当前用户信息")
     @PatchMapping("updateUserInfo")
-    public Result<User> updateUserInfo(HttpSession session, @RequestBody User user) {
-        User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
-        if (currentUser == null) {
+    public Result<User> updateUserInfo(HttpServletRequest request, HttpServletResponse response, @RequestBody User user) {
+        String loginToken = CookieUtil.readLoginToken(request);
+        if (StringUtils.isEmpty(loginToken)) {
             return Result.error("用户未登录");
         }
-        user.setId(currentUser.getId());
+        String userStrJson = RedisPoolUtil.get(loginToken);
+        if (userStrJson == null) {
+            return Result.error("用户未登录");
+        }
         Result<User> result = userService.updateUserInfo(user);
         if (result.isSuccess()) {
-            session.setAttribute(Const.CURRENT_USER, result.getData());
+            CookieUtil.writeLoginToken(response, loginToken);
+            RedisPoolUtil.setEx(loginToken, JsonUtil.objToString(result.getData()), Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
         }
         return result;
     }

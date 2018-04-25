@@ -135,8 +135,10 @@ public class UserServiceImpl implements IUserService {
         int count = userMapper.countByExample(usercriteria);
         if (count > 0) {
             String forgetToken = UUID.randomUUID().toString();
-            //放入本地缓存
-            CaffeineConfig.setKey(Const.TOKEN_PREFIX + user.getUsername(), forgetToken);
+            // forgetToken放入本地缓存,如果是集群情况下,那么forgetToken将拿不到，
+            // 这里的forgetToken 是为了防止用户的横向越权
+            // CaffeineConfig.setKey(Const.TOKEN_PREFIX + user.getUsername(), forgetToken);
+            RedisPoolUtil.setEx(Const.TOKEN_PREFIX + user.getUsername(), forgetToken, 60 * 30);
             return Result.success(forgetToken);
         }
         return Result.error("问题的答案错误");
@@ -151,10 +153,13 @@ public class UserServiceImpl implements IUserService {
         if (result.isSuccess()) {
             return Result.error("用户名不存在");
         }
-        String token = CaffeineConfig.getKey(Const.TOKEN_PREFIX + username);
+        //如果是集群情况下，那么forgetToken将拿不到,放入redis里面
+        //String token = CaffeineConfig.getKey(Const.TOKEN_PREFIX + username);
+        String token = RedisPoolUtil.get(Const.TOKEN_PREFIX + username);
         if (StringUtils.isNotBlank(token)) {
             return Result.error("token 无效已过期");
         }
+        //从缓存里面拿到token前端传过来的验证
         if (StringUtils.equals(token, forgetToken)) {
             String password = MD5Util.MD5EncodeUtf8(passwordNew);
             UserCriteria usercriteria = new UserCriteria();
@@ -181,8 +186,8 @@ public class UserServiceImpl implements IUserService {
         criteria.andPasswordEqualTo(MD5Util.MD5EncodeUtf8(passwordOld));
         user.setPassword(MD5Util.MD5EncodeUtf8(passwordNew));
         user.setUpdateTime(new Date());
-        int count = userMapper.updateByExampleSelective(user,usercriteria);
-        if(count > 0){
+        int count = userMapper.updateByExampleSelective(user, usercriteria);
+        if (count > 0) {
             return Result.success("修改密码成功");
         }
         return Result.error("修改密码失败");
@@ -197,12 +202,12 @@ public class UserServiceImpl implements IUserService {
         criteria.andIdNotEqualTo(user.getId());
         criteria.andEmailEqualTo(user.getEmail());
         int count = userMapper.countByExample(usercriteria);
-        if(count>0){
+        if (count > 0) {
             return Result.error("Email 已经存在");
         }
         user.setUpdateTime(new Date());
         int count2 = userMapper.updateByPrimaryKey(user);
-        if(count2>0){
+        if (count2 > 0) {
             return Result.success(user);
         }
         return Result.error("修改失败");
@@ -210,7 +215,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public Result<Boolean> checkAdminRole(User user) {
-        if(user!=null && user.getRole().intValue() == Const.Role.ROLE_ADMIN){
+        if (user != null && user.getRole().intValue() == Const.Role.ROLE_ADMIN) {
             return Result.success();
         }
         return Result.error();

@@ -9,8 +9,12 @@ import com.mmall.common.ResponseCode;
 import com.mmall.common.Result;
 import com.mmall.domain.User;
 import com.mmall.service.IOrderService;
+import com.mmall.util.CookieUtil;
+import com.mmall.util.JsonUtil;
+import com.mmall.util.RedisPoolUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +44,13 @@ public class OrderController {
 
     @ApiOperation(value = "创建订单")
     @PostMapping("create")
-    public Result create(HttpSession session, Integer shippingId){
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
+    public Result create(HttpServletRequest request, Integer shippingId){
+        String loginToken = CookieUtil.readLoginToken(request);
+        if(StringUtils.isEmpty(loginToken)){
+            return Result.error("用户未登录");
+        }
+        String userJsonStr = RedisPoolUtil.get(loginToken);
+        User user = JsonUtil.stringToObj(userJsonStr, User.class);
         if(user ==null){
             return Result.error(ResponseCode.NEED_LOGIN);
         }
@@ -50,8 +59,13 @@ public class OrderController {
 
     @ApiOperation(value = "取消订单")
     @PostMapping("cancel")
-    public Result cancel(HttpSession session, Long orderNo){
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
+    public Result cancel(HttpServletRequest request, Long orderNo){
+        String loginToken = CookieUtil.readLoginToken(request);
+        if(StringUtils.isEmpty(loginToken)){
+            return Result.error("用户未登录");
+        }
+        String userJsonStr = RedisPoolUtil.get(loginToken);
+        User user = JsonUtil.stringToObj(userJsonStr, User.class);
         if(user ==null){
             return Result.error(ResponseCode.NEED_LOGIN);
         }
@@ -60,8 +74,13 @@ public class OrderController {
 
     @ApiOperation(value = "获取购物车中已经选中的商品")
     @GetMapping("get_order_cart_product")
-    public Result getOrderCartProduct(HttpSession session){
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
+    public Result getOrderCartProduct(HttpServletRequest request){
+        String loginToken = CookieUtil.readLoginToken(request);
+        if(StringUtils.isEmpty(loginToken)){
+            return Result.error("用户未登录");
+        }
+        String userJsonStr = RedisPoolUtil.get(loginToken);
+        User user = JsonUtil.stringToObj(userJsonStr, User.class);
         if(user ==null){
             return Result.error(ResponseCode.NEED_LOGIN);
         }
@@ -71,8 +90,13 @@ public class OrderController {
 
     @ApiOperation(value = "获取订单详情")
     @GetMapping("detail")
-    public Result detail(HttpSession session,Long orderNo){
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
+    public Result detail(HttpServletRequest request,Long orderNo){
+        String loginToken = CookieUtil.readLoginToken(request);
+        if(StringUtils.isEmpty(loginToken)){
+            return Result.error("用户未登录");
+        }
+        String userJsonStr = RedisPoolUtil.get(loginToken);
+        User user = JsonUtil.stringToObj(userJsonStr, User.class);
         if(user ==null){
             return Result.error(ResponseCode.NEED_LOGIN);
         }
@@ -81,8 +105,13 @@ public class OrderController {
 
     @ApiOperation(value = "订单列表")
     @GetMapping("list")
-    public Result list(HttpSession session, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum, @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
+    public Result list(HttpServletRequest request, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum, @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
+        String loginToken = CookieUtil.readLoginToken(request);
+        if(StringUtils.isEmpty(loginToken)){
+            return Result.error("用户未登录");
+        }
+        String userJsonStr = RedisPoolUtil.get(loginToken);
+        User user = JsonUtil.stringToObj(userJsonStr, User.class);
         if(user ==null){
             return Result.error(ResponseCode.NEED_LOGIN);
         }
@@ -102,8 +131,13 @@ public class OrderController {
 
     @ApiOperation(value = "支付接口")
     @PostMapping("pay")
-    public Result pay(HttpSession session, Long orderNo, HttpServletRequest request) {
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
+    public Result pay(Long orderNo, HttpServletRequest request) {
+        String loginToken = CookieUtil.readLoginToken(request);
+        if(StringUtils.isEmpty(loginToken)){
+            return Result.error("用户未登录");
+        }
+        String userJsonStr = RedisPoolUtil.get(loginToken);
+        User user = JsonUtil.stringToObj(userJsonStr, User.class);
         if (user == null) {
             return Result.success(ResponseCode.NEED_LOGIN);
         }
@@ -161,8 +195,13 @@ public class OrderController {
 
     @ApiOperation(value = "查询该订单是否支付成功")
     @GetMapping("query_order_pay_status.do")
-    public Result<Boolean> queryOrderPayStatus(HttpSession session, Long orderNo){
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
+    public Result<Boolean> queryOrderPayStatus(HttpServletRequest request, Long orderNo){
+        String loginToken = CookieUtil.readLoginToken(request);
+        if(StringUtils.isEmpty(loginToken)){
+            return Result.error("用户未登录");
+        }
+        String userJsonStr = RedisPoolUtil.get(loginToken);
+        User user = JsonUtil.stringToObj(userJsonStr, User.class);
         if(user ==null){
             return Result.error(ResponseCode.NEED_LOGIN);
         }
