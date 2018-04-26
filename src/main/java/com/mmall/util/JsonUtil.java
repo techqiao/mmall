@@ -141,6 +141,7 @@ public class JsonUtil {
         User user = new User();
         user.setId(1);
         user.setPassword("To");
+        System.out.println(JsonUtil.objToStringPretty(user));
         User user2 = new User();
         user2.setId(1);
         user2.setPassword("To");

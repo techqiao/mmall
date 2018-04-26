@@ -1,5 +1,8 @@
 package com.mmall;
 
+import com.mmall.util.DateTimeUtil;
+
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -24,10 +27,6 @@ public class Test {
         return mobile;
     }
     public static void main(String[] args) {
-        System.out.println("请输入手机号码");
-        Scanner sc = new Scanner(System.in);
-        String s = sc.next();
-        Test t = new Test();
-        t.checkMobile(s);
+        System.out.println(new Date());
     }
 }

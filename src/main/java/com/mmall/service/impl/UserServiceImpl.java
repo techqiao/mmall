@@ -70,6 +70,8 @@ public class UserServiceImpl implements IUserService {
         }
         user.setRole(Const.Role.ROLE_CUSTOMER);
         user.setPassword(MD5Util.MD5EncodeUtf8(user.getPassword()));
+        user.setUpdateTime(new Date());
+        user.setCreateTime(new Date());
         //MD5 加密
         int count = userMapper.insertSelective(user);
         if (count == 0) {
