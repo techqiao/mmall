@@ -236,12 +236,12 @@ public class ShippingCriteria {
         }
 
         public Criteria andIdIn(List<Integer> values) {
-            addCriterion("id in", values, "id");
+            addCriterion("id interceptor", values, "id");
             return (Criteria) this;
         }
 
         public Criteria andIdNotIn(List<Integer> values) {
-            addCriterion("id not in", values, "id");
+            addCriterion("id not interceptor", values, "id");
             return (Criteria) this;
         }
 
@@ -296,12 +296,12 @@ public class ShippingCriteria {
         }
 
         public Criteria andUserIdIn(List<Integer> values) {
-            addCriterion("user_id in", values, "userId");
+            addCriterion("user_id interceptor", values, "userId");
             return (Criteria) this;
         }
 
         public Criteria andUserIdNotIn(List<Integer> values) {
-            addCriterion("user_id not in", values, "userId");
+            addCriterion("user_id not interceptor", values, "userId");
             return (Criteria) this;
         }
 
@@ -366,12 +366,12 @@ public class ShippingCriteria {
         }
 
         public Criteria andReceiverNameIn(List<String> values) {
-            addCriterion("receiver_name in", values, "receiverName");
+            addCriterion("receiver_name interceptor", values, "receiverName");
             return (Criteria) this;
         }
 
         public Criteria andReceiverNameNotIn(List<String> values) {
-            addCriterion("receiver_name not in", values, "receiverName");
+            addCriterion("receiver_name not interceptor", values, "receiverName");
             return (Criteria) this;
         }
 
@@ -436,12 +436,12 @@ public class ShippingCriteria {
         }
 
         public Criteria andReceiverPhoneIn(List<String> values) {
-            addCriterion("receiver_phone in", values, "receiverPhone");
+            addCriterion("receiver_phone interceptor", values, "receiverPhone");
             return (Criteria) this;
         }
 
         public Criteria andReceiverPhoneNotIn(List<String> values) {
-            addCriterion("receiver_phone not in", values, "receiverPhone");
+            addCriterion("receiver_phone not interceptor", values, "receiverPhone");
             return (Criteria) this;
         }
 
@@ -506,12 +506,12 @@ public class ShippingCriteria {
         }
 
         public Criteria andReceiverMobileIn(List<String> values) {
-            addCriterion("receiver_mobile in", values, "receiverMobile");
+            addCriterion("receiver_mobile interceptor", values, "receiverMobile");
             return (Criteria) this;
         }
 
         public Criteria andReceiverMobileNotIn(List<String> values) {
-            addCriterion("receiver_mobile not in", values, "receiverMobile");
+            addCriterion("receiver_mobile not interceptor", values, "receiverMobile");
             return (Criteria) this;
         }
 
@@ -576,12 +576,12 @@ public class ShippingCriteria {
         }
 
         public Criteria andReceiverProvinceIn(List<String> values) {
-            addCriterion("receiver_province in", values, "receiverProvince");
+            addCriterion("receiver_province interceptor", values, "receiverProvince");
             return (Criteria) this;
         }
 
         public Criteria andReceiverProvinceNotIn(List<String> values) {
-            addCriterion("receiver_province not in", values, "receiverProvince");
+            addCriterion("receiver_province not interceptor", values, "receiverProvince");
             return (Criteria) this;
         }
 
@@ -646,12 +646,12 @@ public class ShippingCriteria {
         }
 
         public Criteria andReceiverCityIn(List<String> values) {
-            addCriterion("receiver_city in", values, "receiverCity");
+            addCriterion("receiver_city interceptor", values, "receiverCity");
             return (Criteria) this;
         }
 
         public Criteria andReceiverCityNotIn(List<String> values) {
-            addCriterion("receiver_city not in", values, "receiverCity");
+            addCriterion("receiver_city not interceptor", values, "receiverCity");
             return (Criteria) this;
         }
 
@@ -716,12 +716,12 @@ public class ShippingCriteria {
         }
 
         public Criteria andReceiverDistrictIn(List<String> values) {
-            addCriterion("receiver_district in", values, "receiverDistrict");
+            addCriterion("receiver_district interceptor", values, "receiverDistrict");
             return (Criteria) this;
         }
 
         public Criteria andReceiverDistrictNotIn(List<String> values) {
-            addCriterion("receiver_district not in", values, "receiverDistrict");
+            addCriterion("receiver_district not interceptor", values, "receiverDistrict");
             return (Criteria) this;
         }
 
@@ -786,12 +786,12 @@ public class ShippingCriteria {
         }
 
         public Criteria andReceiverAddressIn(List<String> values) {
-            addCriterion("receiver_address in", values, "receiverAddress");
+            addCriterion("receiver_address interceptor", values, "receiverAddress");
             return (Criteria) this;
         }
 
         public Criteria andReceiverAddressNotIn(List<String> values) {
-            addCriterion("receiver_address not in", values, "receiverAddress");
+            addCriterion("receiver_address not interceptor", values, "receiverAddress");
             return (Criteria) this;
         }
 
@@ -856,12 +856,12 @@ public class ShippingCriteria {
         }
 
         public Criteria andReceiverZipIn(List<String> values) {
-            addCriterion("receiver_zip in", values, "receiverZip");
+            addCriterion("receiver_zip interceptor", values, "receiverZip");
             return (Criteria) this;
         }
 
         public Criteria andReceiverZipNotIn(List<String> values) {
-            addCriterion("receiver_zip not in", values, "receiverZip");
+            addCriterion("receiver_zip not interceptor", values, "receiverZip");
             return (Criteria) this;
         }
 
@@ -916,12 +916,12 @@ public class ShippingCriteria {
         }
 
         public Criteria andCreateTimeIn(List<Date> values) {
-            addCriterion("create_time in", values, "createTime");
+            addCriterion("create_time interceptor", values, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeNotIn(List<Date> values) {
-            addCriterion("create_time not in", values, "createTime");
+            addCriterion("create_time not interceptor", values, "createTime");
             return (Criteria) this;
         }
 
@@ -976,12 +976,12 @@ public class ShippingCriteria {
         }
 
         public Criteria andUpdateTimeIn(List<Date> values) {
-            addCriterion("update_time in", values, "updateTime");
+            addCriterion("update_time interceptor", values, "updateTime");
             return (Criteria) this;
         }
 
         public Criteria andUpdateTimeNotIn(List<Date> values) {
-            addCriterion("update_time not in", values, "updateTime");
+            addCriterion("update_time not interceptor", values, "updateTime");
             return (Criteria) this;
         }
 

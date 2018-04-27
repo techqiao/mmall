@@ -53,8 +53,8 @@ public class RedisShardedPool {
         JedisShardInfo info2 = new JedisShardInfo(redis2Ip, redis2Port, 1000 * 2);
 
         List<JedisShardInfo> jedisShardInfoList = new ArrayList<>(2);
-        jedisShardInfoList.add(info1);
-        jedisShardInfoList.add(info2);
+        jedisShardInfoList.add(info1);//1号节点
+        jedisShardInfoList.add(info2);//2号节点
 
         //sharded jedis连接池 MurmurHash 是一种非加密型哈希函数,适用于一般的哈希检索操作
         //ShardedJedis是通过一致性哈希来实现分布式缓存的，通过一定的策略把不同的key分配到不同的redis server上，达到横向扩展的目的

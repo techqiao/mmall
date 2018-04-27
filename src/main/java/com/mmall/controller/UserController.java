@@ -7,12 +7,14 @@ import com.mmall.service.IUserService;
 import com.mmall.util.CookieUtil;
 import com.mmall.util.JsonUtil;
 import com.mmall.util.RedisPoolUtil;
+import com.mmall.util.RedisShardedPoolUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import redis.clients.jedis.ShardedJedisPool;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +45,7 @@ public class UserController {
             //CookieUtil.readLoginToken(request);
             //CookieUtil.delLoginToken(response, request);
             // 放入缓存
-            RedisPoolUtil.setEx(session.getId(), JsonUtil.objToString(result.getData()), Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
+            RedisShardedPoolUtil.setEx(session.getId(), JsonUtil.objToString(result.getData()), Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
             // 模拟集群 同一个用户在不同服务器上的session id不同
         }
         return result;
@@ -54,7 +56,7 @@ public class UserController {
     public Result<String> loginOut(HttpServletRequest request, HttpServletResponse response) {
         String loginToken = CookieUtil.readLoginToken(request);
         CookieUtil.delLoginToken(response, request);
-        RedisPoolUtil.del(loginToken);
+        RedisShardedPoolUtil.del(loginToken);
         return Result.success();
     }
 
@@ -112,7 +114,7 @@ public class UserController {
         if(StringUtils.isEmpty(loginToken)){
             return Result.error("用户未登录");
         }
-        String userJsonStr = RedisPoolUtil.get(loginToken);
+        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
         User user = JsonUtil.stringToObj(userJsonStr, User.class);
         if (user == null) {
             return Result.error("用户未登录");
@@ -127,14 +129,14 @@ public class UserController {
         if (StringUtils.isEmpty(loginToken)) {
             return Result.error("用户未登录");
         }
-        String userStrJson = RedisPoolUtil.get(loginToken);
+        String userStrJson = RedisShardedPoolUtil.get(loginToken);
         if (userStrJson == null) {
             return Result.error("用户未登录");
         }
         Result<User> result = userService.updateUserInfo(user);
         if (result.isSuccess()) {
             CookieUtil.writeLoginToken(response, loginToken);
-            RedisPoolUtil.setEx(loginToken, JsonUtil.objToString(result.getData()), Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
+            RedisShardedPoolUtil.setEx(loginToken, JsonUtil.objToString(result.getData()), Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
         }
         return result;
     }

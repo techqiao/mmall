@@ -237,12 +237,12 @@ public class ProductCriteria {
         }
 
         public Criteria andIdIn(List<Integer> values) {
-            addCriterion("id in", values, "id");
+            addCriterion("id interceptor", values, "id");
             return (Criteria) this;
         }
 
         public Criteria andIdNotIn(List<Integer> values) {
-            addCriterion("id not in", values, "id");
+            addCriterion("id not interceptor", values, "id");
             return (Criteria) this;
         }
 
@@ -297,12 +297,12 @@ public class ProductCriteria {
         }
 
         public Criteria andCategoryIdIn(List<Integer> values) {
-            addCriterion("category_id in", values, "categoryId");
+            addCriterion("category_id interceptor", values, "categoryId");
             return (Criteria) this;
         }
 
         public Criteria andCategoryIdNotIn(List<Integer> values) {
-            addCriterion("category_id not in", values, "categoryId");
+            addCriterion("category_id not interceptor", values, "categoryId");
             return (Criteria) this;
         }
 
@@ -367,12 +367,12 @@ public class ProductCriteria {
         }
 
         public Criteria andNameIn(List<String> values) {
-            addCriterion("name in", values, "name");
+            addCriterion("name interceptor", values, "name");
             return (Criteria) this;
         }
 
         public Criteria andNameNotIn(List<String> values) {
-            addCriterion("name not in", values, "name");
+            addCriterion("name not interceptor", values, "name");
             return (Criteria) this;
         }
 
@@ -437,12 +437,12 @@ public class ProductCriteria {
         }
 
         public Criteria andSubtitleIn(List<String> values) {
-            addCriterion("subtitle in", values, "subtitle");
+            addCriterion("subtitle interceptor", values, "subtitle");
             return (Criteria) this;
         }
 
         public Criteria andSubtitleNotIn(List<String> values) {
-            addCriterion("subtitle not in", values, "subtitle");
+            addCriterion("subtitle not interceptor", values, "subtitle");
             return (Criteria) this;
         }
 
@@ -507,12 +507,12 @@ public class ProductCriteria {
         }
 
         public Criteria andMainImageIn(List<String> values) {
-            addCriterion("main_image in", values, "mainImage");
+            addCriterion("main_image interceptor", values, "mainImage");
             return (Criteria) this;
         }
 
         public Criteria andMainImageNotIn(List<String> values) {
-            addCriterion("main_image not in", values, "mainImage");
+            addCriterion("main_image not interceptor", values, "mainImage");
             return (Criteria) this;
         }
 
@@ -567,12 +567,12 @@ public class ProductCriteria {
         }
 
         public Criteria andPriceIn(List<BigDecimal> values) {
-            addCriterion("price in", values, "price");
+            addCriterion("price interceptor", values, "price");
             return (Criteria) this;
         }
 
         public Criteria andPriceNotIn(List<BigDecimal> values) {
-            addCriterion("price not in", values, "price");
+            addCriterion("price not interceptor", values, "price");
             return (Criteria) this;
         }
 
@@ -627,12 +627,12 @@ public class ProductCriteria {
         }
 
         public Criteria andStockIn(List<Integer> values) {
-            addCriterion("stock in", values, "stock");
+            addCriterion("stock interceptor", values, "stock");
             return (Criteria) this;
         }
 
         public Criteria andStockNotIn(List<Integer> values) {
-            addCriterion("stock not in", values, "stock");
+            addCriterion("stock not interceptor", values, "stock");
             return (Criteria) this;
         }
 
@@ -687,12 +687,12 @@ public class ProductCriteria {
         }
 
         public Criteria andStatusIn(List<Integer> values) {
-            addCriterion("status in", values, "status");
+            addCriterion("status interceptor", values, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusNotIn(List<Integer> values) {
-            addCriterion("status not in", values, "status");
+            addCriterion("status not interceptor", values, "status");
             return (Criteria) this;
         }
 
@@ -747,12 +747,12 @@ public class ProductCriteria {
         }
 
         public Criteria andCreateTimeIn(List<Date> values) {
-            addCriterion("create_time in", values, "createTime");
+            addCriterion("create_time interceptor", values, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeNotIn(List<Date> values) {
-            addCriterion("create_time not in", values, "createTime");
+            addCriterion("create_time not interceptor", values, "createTime");
             return (Criteria) this;
         }
 
@@ -807,12 +807,12 @@ public class ProductCriteria {
         }
 
         public Criteria andUpdateTimeIn(List<Date> values) {
-            addCriterion("update_time in", values, "updateTime");
+            addCriterion("update_time interceptor", values, "updateTime");
             return (Criteria) this;
         }
 
         public Criteria andUpdateTimeNotIn(List<Date> values) {
-            addCriterion("update_time not in", values, "updateTime");
+            addCriterion("update_time not interceptor", values, "updateTime");
             return (Criteria) this;
         }
 

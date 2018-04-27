@@ -236,12 +236,12 @@ public class PayInfoCriteria {
         }
 
         public Criteria andIdIn(List<Integer> values) {
-            addCriterion("id in", values, "id");
+            addCriterion("id interceptor", values, "id");
             return (Criteria) this;
         }
 
         public Criteria andIdNotIn(List<Integer> values) {
-            addCriterion("id not in", values, "id");
+            addCriterion("id not interceptor", values, "id");
             return (Criteria) this;
         }
 
@@ -296,12 +296,12 @@ public class PayInfoCriteria {
         }
 
         public Criteria andUserIdIn(List<Integer> values) {
-            addCriterion("user_id in", values, "userId");
+            addCriterion("user_id interceptor", values, "userId");
             return (Criteria) this;
         }
 
         public Criteria andUserIdNotIn(List<Integer> values) {
-            addCriterion("user_id not in", values, "userId");
+            addCriterion("user_id not interceptor", values, "userId");
             return (Criteria) this;
         }
 
@@ -356,12 +356,12 @@ public class PayInfoCriteria {
         }
 
         public Criteria andOrderNoIn(List<Long> values) {
-            addCriterion("order_no in", values, "orderNo");
+            addCriterion("order_no interceptor", values, "orderNo");
             return (Criteria) this;
         }
 
         public Criteria andOrderNoNotIn(List<Long> values) {
-            addCriterion("order_no not in", values, "orderNo");
+            addCriterion("order_no not interceptor", values, "orderNo");
             return (Criteria) this;
         }
 
@@ -416,12 +416,12 @@ public class PayInfoCriteria {
         }
 
         public Criteria andPayPlatformIn(List<Integer> values) {
-            addCriterion("pay_platform in", values, "payPlatform");
+            addCriterion("pay_platform interceptor", values, "payPlatform");
             return (Criteria) this;
         }
 
         public Criteria andPayPlatformNotIn(List<Integer> values) {
-            addCriterion("pay_platform not in", values, "payPlatform");
+            addCriterion("pay_platform not interceptor", values, "payPlatform");
             return (Criteria) this;
         }
 
@@ -486,12 +486,12 @@ public class PayInfoCriteria {
         }
 
         public Criteria andPlatformNumberIn(List<String> values) {
-            addCriterion("platform_number in", values, "platformNumber");
+            addCriterion("platform_number interceptor", values, "platformNumber");
             return (Criteria) this;
         }
 
         public Criteria andPlatformNumberNotIn(List<String> values) {
-            addCriterion("platform_number not in", values, "platformNumber");
+            addCriterion("platform_number not interceptor", values, "platformNumber");
             return (Criteria) this;
         }
 
@@ -556,12 +556,12 @@ public class PayInfoCriteria {
         }
 
         public Criteria andPlatformStatusIn(List<String> values) {
-            addCriterion("platform_status in", values, "platformStatus");
+            addCriterion("platform_status interceptor", values, "platformStatus");
             return (Criteria) this;
         }
 
         public Criteria andPlatformStatusNotIn(List<String> values) {
-            addCriterion("platform_status not in", values, "platformStatus");
+            addCriterion("platform_status not interceptor", values, "platformStatus");
             return (Criteria) this;
         }
 
@@ -616,12 +616,12 @@ public class PayInfoCriteria {
         }
 
         public Criteria andCreateTimeIn(List<Date> values) {
-            addCriterion("create_time in", values, "createTime");
+            addCriterion("create_time interceptor", values, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeNotIn(List<Date> values) {
-            addCriterion("create_time not in", values, "createTime");
+            addCriterion("create_time not interceptor", values, "createTime");
             return (Criteria) this;
         }
 
@@ -676,12 +676,12 @@ public class PayInfoCriteria {
         }
 
         public Criteria andUpdateTimeIn(List<Date> values) {
-            addCriterion("update_time in", values, "updateTime");
+            addCriterion("update_time interceptor", values, "updateTime");
             return (Criteria) this;
         }
 
         public Criteria andUpdateTimeNotIn(List<Date> values) {
-            addCriterion("update_time not in", values, "updateTime");
+            addCriterion("update_time not interceptor", values, "updateTime");
             return (Criteria) this;
         }
 

@@ -236,12 +236,12 @@ public class CategoryCriteria {
         }
 
         public Criteria andIdIn(List<Integer> values) {
-            addCriterion("id in", values, "id");
+            addCriterion("id interceptor", values, "id");
             return (Criteria) this;
         }
 
         public Criteria andIdNotIn(List<Integer> values) {
-            addCriterion("id not in", values, "id");
+            addCriterion("id not interceptor", values, "id");
             return (Criteria) this;
         }
 
@@ -296,12 +296,12 @@ public class CategoryCriteria {
         }
 
         public Criteria andParentIdIn(List<Integer> values) {
-            addCriterion("parent_id in", values, "parentId");
+            addCriterion("parent_id interceptor", values, "parentId");
             return (Criteria) this;
         }
 
         public Criteria andParentIdNotIn(List<Integer> values) {
-            addCriterion("parent_id not in", values, "parentId");
+            addCriterion("parent_id not interceptor", values, "parentId");
             return (Criteria) this;
         }
 
@@ -366,12 +366,12 @@ public class CategoryCriteria {
         }
 
         public Criteria andNameIn(List<String> values) {
-            addCriterion("name in", values, "name");
+            addCriterion("name interceptor", values, "name");
             return (Criteria) this;
         }
 
         public Criteria andNameNotIn(List<String> values) {
-            addCriterion("name not in", values, "name");
+            addCriterion("name not interceptor", values, "name");
             return (Criteria) this;
         }
 
@@ -426,12 +426,12 @@ public class CategoryCriteria {
         }
 
         public Criteria andStatusIn(List<Boolean> values) {
-            addCriterion("status in", values, "status");
+            addCriterion("status interceptor", values, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusNotIn(List<Boolean> values) {
-            addCriterion("status not in", values, "status");
+            addCriterion("status not interceptor", values, "status");
             return (Criteria) this;
         }
 
@@ -486,12 +486,12 @@ public class CategoryCriteria {
         }
 
         public Criteria andSortOrderIn(List<Integer> values) {
-            addCriterion("sort_order in", values, "sortOrder");
+            addCriterion("sort_order interceptor", values, "sortOrder");
             return (Criteria) this;
         }
 
         public Criteria andSortOrderNotIn(List<Integer> values) {
-            addCriterion("sort_order not in", values, "sortOrder");
+            addCriterion("sort_order not interceptor", values, "sortOrder");
             return (Criteria) this;
         }
 
@@ -546,12 +546,12 @@ public class CategoryCriteria {
         }
 
         public Criteria andCreateTimeIn(List<Date> values) {
-            addCriterion("create_time in", values, "createTime");
+            addCriterion("create_time interceptor", values, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeNotIn(List<Date> values) {
-            addCriterion("create_time not in", values, "createTime");
+            addCriterion("create_time not interceptor", values, "createTime");
             return (Criteria) this;
         }
 
@@ -606,12 +606,12 @@ public class CategoryCriteria {
         }
 
         public Criteria andUpdateTimeIn(List<Date> values) {
-            addCriterion("update_time in", values, "updateTime");
+            addCriterion("update_time interceptor", values, "updateTime");
             return (Criteria) this;
         }
 
         public Criteria andUpdateTimeNotIn(List<Date> values) {
-            addCriterion("update_time not in", values, "updateTime");
+            addCriterion("update_time not interceptor", values, "updateTime");
             return (Criteria) this;
         }
 

@@ -236,12 +236,12 @@ public class UserCriteria {
         }
 
         public Criteria andIdIn(List<Integer> values) {
-            addCriterion("id in", values, "id");
+            addCriterion("id interceptor", values, "id");
             return (Criteria) this;
         }
 
         public Criteria andIdNotIn(List<Integer> values) {
-            addCriterion("id not in", values, "id");
+            addCriterion("id not interceptor", values, "id");
             return (Criteria) this;
         }
 
@@ -306,12 +306,12 @@ public class UserCriteria {
         }
 
         public Criteria andUsernameIn(List<String> values) {
-            addCriterion("username in", values, "username");
+            addCriterion("username interceptor", values, "username");
             return (Criteria) this;
         }
 
         public Criteria andUsernameNotIn(List<String> values) {
-            addCriterion("username not in", values, "username");
+            addCriterion("username not interceptor", values, "username");
             return (Criteria) this;
         }
 
@@ -376,12 +376,12 @@ public class UserCriteria {
         }
 
         public Criteria andPasswordIn(List<String> values) {
-            addCriterion("password in", values, "password");
+            addCriterion("password interceptor", values, "password");
             return (Criteria) this;
         }
 
         public Criteria andPasswordNotIn(List<String> values) {
-            addCriterion("password not in", values, "password");
+            addCriterion("password not interceptor", values, "password");
             return (Criteria) this;
         }
 
@@ -446,12 +446,12 @@ public class UserCriteria {
         }
 
         public Criteria andEmailIn(List<String> values) {
-            addCriterion("email in", values, "email");
+            addCriterion("email interceptor", values, "email");
             return (Criteria) this;
         }
 
         public Criteria andEmailNotIn(List<String> values) {
-            addCriterion("email not in", values, "email");
+            addCriterion("email not interceptor", values, "email");
             return (Criteria) this;
         }
 
@@ -516,12 +516,12 @@ public class UserCriteria {
         }
 
         public Criteria andPhoneIn(List<String> values) {
-            addCriterion("phone in", values, "phone");
+            addCriterion("phone interceptor", values, "phone");
             return (Criteria) this;
         }
 
         public Criteria andPhoneNotIn(List<String> values) {
-            addCriterion("phone not in", values, "phone");
+            addCriterion("phone not interceptor", values, "phone");
             return (Criteria) this;
         }
 
@@ -586,12 +586,12 @@ public class UserCriteria {
         }
 
         public Criteria andQuestionIn(List<String> values) {
-            addCriterion("question in", values, "question");
+            addCriterion("question interceptor", values, "question");
             return (Criteria) this;
         }
 
         public Criteria andQuestionNotIn(List<String> values) {
-            addCriterion("question not in", values, "question");
+            addCriterion("question not interceptor", values, "question");
             return (Criteria) this;
         }
 
@@ -656,12 +656,12 @@ public class UserCriteria {
         }
 
         public Criteria andAnswerIn(List<String> values) {
-            addCriterion("answer in", values, "answer");
+            addCriterion("answer interceptor", values, "answer");
             return (Criteria) this;
         }
 
         public Criteria andAnswerNotIn(List<String> values) {
-            addCriterion("answer not in", values, "answer");
+            addCriterion("answer not interceptor", values, "answer");
             return (Criteria) this;
         }
 
@@ -716,12 +716,12 @@ public class UserCriteria {
         }
 
         public Criteria andRoleIn(List<Integer> values) {
-            addCriterion("role in", values, "role");
+            addCriterion("role interceptor", values, "role");
             return (Criteria) this;
         }
 
         public Criteria andRoleNotIn(List<Integer> values) {
-            addCriterion("role not in", values, "role");
+            addCriterion("role not interceptor", values, "role");
             return (Criteria) this;
         }
 
@@ -776,12 +776,12 @@ public class UserCriteria {
         }
 
         public Criteria andCreateTimeIn(List<Date> values) {
-            addCriterion("create_time in", values, "createTime");
+            addCriterion("create_time interceptor", values, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeNotIn(List<Date> values) {
-            addCriterion("create_time not in", values, "createTime");
+            addCriterion("create_time not interceptor", values, "createTime");
             return (Criteria) this;
         }
 
@@ -836,12 +836,12 @@ public class UserCriteria {
         }
 
         public Criteria andUpdateTimeIn(List<Date> values) {
-            addCriterion("update_time in", values, "updateTime");
+            addCriterion("update_time interceptor", values, "updateTime");
             return (Criteria) this;
         }
 
         public Criteria andUpdateTimeNotIn(List<Date> values) {
-            addCriterion("update_time not in", values, "updateTime");
+            addCriterion("update_time not interceptor", values, "updateTime");
             return (Criteria) this;
         }
 

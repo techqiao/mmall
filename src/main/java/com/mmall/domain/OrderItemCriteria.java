@@ -237,12 +237,12 @@ public class OrderItemCriteria {
         }
 
         public Criteria andIdIn(List<Integer> values) {
-            addCriterion("id in", values, "id");
+            addCriterion("id interceptor", values, "id");
             return (Criteria) this;
         }
 
         public Criteria andIdNotIn(List<Integer> values) {
-            addCriterion("id not in", values, "id");
+            addCriterion("id not interceptor", values, "id");
             return (Criteria) this;
         }
 
@@ -297,12 +297,12 @@ public class OrderItemCriteria {
         }
 
         public Criteria andUserIdIn(List<Integer> values) {
-            addCriterion("user_id in", values, "userId");
+            addCriterion("user_id interceptor", values, "userId");
             return (Criteria) this;
         }
 
         public Criteria andUserIdNotIn(List<Integer> values) {
-            addCriterion("user_id not in", values, "userId");
+            addCriterion("user_id not interceptor", values, "userId");
             return (Criteria) this;
         }
 
@@ -357,12 +357,12 @@ public class OrderItemCriteria {
         }
 
         public Criteria andOrderNoIn(List<Long> values) {
-            addCriterion("order_no in", values, "orderNo");
+            addCriterion("order_no interceptor", values, "orderNo");
             return (Criteria) this;
         }
 
         public Criteria andOrderNoNotIn(List<Long> values) {
-            addCriterion("order_no not in", values, "orderNo");
+            addCriterion("order_no not interceptor", values, "orderNo");
             return (Criteria) this;
         }
 
@@ -417,12 +417,12 @@ public class OrderItemCriteria {
         }
 
         public Criteria andProductIdIn(List<Integer> values) {
-            addCriterion("product_id in", values, "productId");
+            addCriterion("product_id interceptor", values, "productId");
             return (Criteria) this;
         }
 
         public Criteria andProductIdNotIn(List<Integer> values) {
-            addCriterion("product_id not in", values, "productId");
+            addCriterion("product_id not interceptor", values, "productId");
             return (Criteria) this;
         }
 
@@ -487,12 +487,12 @@ public class OrderItemCriteria {
         }
 
         public Criteria andProductNameIn(List<String> values) {
-            addCriterion("product_name in", values, "productName");
+            addCriterion("product_name interceptor", values, "productName");
             return (Criteria) this;
         }
 
         public Criteria andProductNameNotIn(List<String> values) {
-            addCriterion("product_name not in", values, "productName");
+            addCriterion("product_name not interceptor", values, "productName");
             return (Criteria) this;
         }
 
@@ -557,12 +557,12 @@ public class OrderItemCriteria {
         }
 
         public Criteria andProductImageIn(List<String> values) {
-            addCriterion("product_image in", values, "productImage");
+            addCriterion("product_image interceptor", values, "productImage");
             return (Criteria) this;
         }
 
         public Criteria andProductImageNotIn(List<String> values) {
-            addCriterion("product_image not in", values, "productImage");
+            addCriterion("product_image not interceptor", values, "productImage");
             return (Criteria) this;
         }
 
@@ -617,12 +617,12 @@ public class OrderItemCriteria {
         }
 
         public Criteria andCurrentUnitPriceIn(List<BigDecimal> values) {
-            addCriterion("current_unit_price in", values, "currentUnitPrice");
+            addCriterion("current_unit_price interceptor", values, "currentUnitPrice");
             return (Criteria) this;
         }
 
         public Criteria andCurrentUnitPriceNotIn(List<BigDecimal> values) {
-            addCriterion("current_unit_price not in", values, "currentUnitPrice");
+            addCriterion("current_unit_price not interceptor", values, "currentUnitPrice");
             return (Criteria) this;
         }
 
@@ -677,12 +677,12 @@ public class OrderItemCriteria {
         }
 
         public Criteria andQuantityIn(List<Integer> values) {
-            addCriterion("quantity in", values, "quantity");
+            addCriterion("quantity interceptor", values, "quantity");
             return (Criteria) this;
         }
 
         public Criteria andQuantityNotIn(List<Integer> values) {
-            addCriterion("quantity not in", values, "quantity");
+            addCriterion("quantity not interceptor", values, "quantity");
             return (Criteria) this;
         }
 
@@ -737,12 +737,12 @@ public class OrderItemCriteria {
         }
 
         public Criteria andTotalPriceIn(List<BigDecimal> values) {
-            addCriterion("total_price in", values, "totalPrice");
+            addCriterion("total_price interceptor", values, "totalPrice");
             return (Criteria) this;
         }
 
         public Criteria andTotalPriceNotIn(List<BigDecimal> values) {
-            addCriterion("total_price not in", values, "totalPrice");
+            addCriterion("total_price not interceptor", values, "totalPrice");
             return (Criteria) this;
         }
 
@@ -797,12 +797,12 @@ public class OrderItemCriteria {
         }
 
         public Criteria andCreateTimeIn(List<Date> values) {
-            addCriterion("create_time in", values, "createTime");
+            addCriterion("create_time interceptor", values, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeNotIn(List<Date> values) {
-            addCriterion("create_time not in", values, "createTime");
+            addCriterion("create_time not interceptor", values, "createTime");
             return (Criteria) this;
         }
 
@@ -857,12 +857,12 @@ public class OrderItemCriteria {
         }
 
         public Criteria andUpdateTimeIn(List<Date> values) {
-            addCriterion("update_time in", values, "updateTime");
+            addCriterion("update_time interceptor", values, "updateTime");
             return (Criteria) this;
         }
 
         public Criteria andUpdateTimeNotIn(List<Date> values) {
-            addCriterion("update_time not in", values, "updateTime");
+            addCriterion("update_time not interceptor", values, "updateTime");
             return (Criteria) this;
         }
 

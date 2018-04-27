@@ -236,12 +236,12 @@ public class CartCriteria {
         }
 
         public Criteria andIdIn(List<Integer> values) {
-            addCriterion("id in", values, "id");
+            addCriterion("id interceptor", values, "id");
             return (Criteria) this;
         }
 
         public Criteria andIdNotIn(List<Integer> values) {
-            addCriterion("id not in", values, "id");
+            addCriterion("id not interceptor", values, "id");
             return (Criteria) this;
         }
 
@@ -296,12 +296,12 @@ public class CartCriteria {
         }
 
         public Criteria andUserIdIn(List<Integer> values) {
-            addCriterion("user_id in", values, "userId");
+            addCriterion("user_id interceptor", values, "userId");
             return (Criteria) this;
         }
 
         public Criteria andUserIdNotIn(List<Integer> values) {
-            addCriterion("user_id not in", values, "userId");
+            addCriterion("user_id not interceptor", values, "userId");
             return (Criteria) this;
         }
 
@@ -356,12 +356,12 @@ public class CartCriteria {
         }
 
         public Criteria andProductIdIn(List<Integer> values) {
-            addCriterion("product_id in", values, "productId");
+            addCriterion("product_id interceptor", values, "productId");
             return (Criteria) this;
         }
 
         public Criteria andProductIdNotIn(List<Integer> values) {
-            addCriterion("product_id not in", values, "productId");
+            addCriterion("product_id not interceptor", values, "productId");
             return (Criteria) this;
         }
 
@@ -416,12 +416,12 @@ public class CartCriteria {
         }
 
         public Criteria andQuantityIn(List<Integer> values) {
-            addCriterion("quantity in", values, "quantity");
+            addCriterion("quantity interceptor", values, "quantity");
             return (Criteria) this;
         }
 
         public Criteria andQuantityNotIn(List<Integer> values) {
-            addCriterion("quantity not in", values, "quantity");
+            addCriterion("quantity not interceptor", values, "quantity");
             return (Criteria) this;
         }
 
@@ -476,12 +476,12 @@ public class CartCriteria {
         }
 
         public Criteria andCheckedIn(List<Integer> values) {
-            addCriterion("checked in", values, "checked");
+            addCriterion("checked interceptor", values, "checked");
             return (Criteria) this;
         }
 
         public Criteria andCheckedNotIn(List<Integer> values) {
-            addCriterion("checked not in", values, "checked");
+            addCriterion("checked not interceptor", values, "checked");
             return (Criteria) this;
         }
 
@@ -536,12 +536,12 @@ public class CartCriteria {
         }
 
         public Criteria andCreateTimeIn(List<Date> values) {
-            addCriterion("create_time in", values, "createTime");
+            addCriterion("create_time interceptor", values, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeNotIn(List<Date> values) {
-            addCriterion("create_time not in", values, "createTime");
+            addCriterion("create_time not interceptor", values, "createTime");
             return (Criteria) this;
         }
 
@@ -596,12 +596,12 @@ public class CartCriteria {
         }
 
         public Criteria andUpdateTimeIn(List<Date> values) {
-            addCriterion("update_time in", values, "updateTime");
+            addCriterion("update_time interceptor", values, "updateTime");
             return (Criteria) this;
         }
 
         public Criteria andUpdateTimeNotIn(List<Date> values) {
-            addCriterion("update_time not in", values, "updateTime");
+            addCriterion("update_time not interceptor", values, "updateTime");
             return (Criteria) this;
         }
 
