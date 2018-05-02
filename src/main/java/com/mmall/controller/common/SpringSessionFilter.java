@@ -12,9 +12,9 @@ import javax.servlet.annotation.WebFilter;
  * <p>@Author : wjq
  * <P>Email : wujiangqiao@difengshanguo.com
  */
-@Component
-@WebFilter(urlPatterns = "/*")
-@Order(1)
+//@Component
+//@WebFilter(urlPatterns = "/*")
+//@Order(1)
 public class SpringSessionFilter extends DelegatingFilterProxy {
 
 }

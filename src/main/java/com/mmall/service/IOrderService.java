@@ -79,4 +79,10 @@ public interface IOrderService {
      */
     Result queryOrderPayStatus(Integer userId,Long orderNo);
 
+    /**
+     * 关闭订单
+     * @param hour
+     */
+    void closeOrder(int hour);
+
 }

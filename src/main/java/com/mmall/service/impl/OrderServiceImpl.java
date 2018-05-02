@@ -29,6 +29,7 @@ import com.mmall.vo.OrderVo;
 import com.mmall.vo.ShippingVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +39,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 /**
  * <p>Description : mmall
@@ -530,6 +528,38 @@ public class OrderServiceImpl implements IOrderService {
             return Result.success();
         }
         return Result.error();
+    }
+
+    @Override
+    public void closeOrder(int hour) {
+        Date closeDateTime = DateUtils.addHours(new Date(), -hour);
+        //List<Order> orderList = orderMapper.selectOrderStatusByCreateTime(Const.OrderStatusEnum.NO_PAY.getCode(), DateTimeUtil.dateToStr(closeDateTime));
+        List<Order> orderList = Lists.newArrayList();//当前时间之前的半小时状态为未支付的订单
+        for (Order order : orderList) {
+            //List<OrderItem> orderItemList = orderItemMapper.getByOrderNo(order.getOrderNo());
+            List<OrderItem> orderItemList = Lists.newArrayList();//根据订单号，获取订单详情
+            for (OrderItem orderItem : orderItemList) {
+
+                //一定要用主键where条件，防止锁表。同时必须是支持MySQL的InnoDB。
+                // Integer stock = productMapper.selectStockByProductId(orderItem.getProductId());
+                Integer stock = 0;
+                //考虑到已生成的订单里的商品，被删除的情况
+                if (stock == null) {
+                    continue;
+                }
+                ProductWithBLOBs product = new ProductWithBLOBs();
+                product.setId(orderItem.getProductId());
+                product.setStock(stock + orderItem.getQuantity());
+                productMapper.updateByPrimaryKeySelective(product);
+            }
+            //关闭订单 状态 status = 0
+//            orderMapper.closeOrderByOrderId(order.getId());
+            logger.info("关闭订单OrderNo：{}", order.getOrderNo());
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(DateUtils.addHours(new Date(), -1));
     }
 
 }
